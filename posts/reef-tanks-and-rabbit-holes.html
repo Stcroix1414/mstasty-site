@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reef Tanks and Rabbit Holes — MsTasty</title>
+  <meta name="description" content="Two reef tanks, a photo gallery, and a bot that reads EXIF data. The adventure continues." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">🍩 <span>MsTasty</span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#schedule">Schedule</a></li>
+        <li><a href="../index.html#stats">Stats</a></li>
+        <li><a href="../blog.html">Blog</a></li>
+        <li><a href="../reef.html">Reef</a></li>
+        <li><a href="../index.html#socials">Socials</a></li>
+      </ul>
+      <a href="https://kick.com/ms-tasty" target="_blank" class="btn btn-primary nav-cta">▶ Watch Live</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="post-header">
+      <a href="../blog.html" style="color: var(--text-muted); font-size: 0.88rem; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 28px; transition: color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">
+        ← Back to Blog
+      </a>
+      <div class="post-meta">
+        <span class="blog-tag">Reef</span>
+        <span>April 28, 2026</span>
+      </div>
+      <h1 style="font-size: clamp(2rem, 5vw, 3.8rem); margin-bottom: 20px;">
+        Reef Tanks and <span class="gradient-text">Rabbit Holes</span>
+      </h1>
+      <p style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.75;">
+        Two reef tanks in the pipeline, a photo gallery on the site, and a bot that reads EXIF metadata. The adventure continues.
+      </p>
+    </div>
+
+    <div class="post-body">
+
+      <p>
+        So apparently streaming wasn't enough. Now we're building reef tanks.
+      </p>
+
+      <p>
+        Two of them. A 1.5 gallon custom acrylic pico peninsula from PNW-Custom — that one's the frag and quarantine tank, where new coral goes before it earns a spot in the display. And a UNS 17 gallon cube, the 40A, which is the main show. Jawfish planned for that one. Deep sandbed, tight lid, the whole thing.
+      </p>
+
+      <h2>Why Reef</h2>
+      <p>
+        I had a tank back in Jersey. Left it behind when I moved to California. Kept the Hydra 26HD light because I'm not an animal, and now it's going back into service over the UNS cube. That light alone covers the most expensive part of the build so the timing finally made sense to get back into it.
+      </p>
+
+      <p>
+        Concord gets cooked in the summer — we're talking 95-100°F regularly. A chiller is probably inevitable. But we'll cross that bridge when we get there.
+      </p>
+
+      <blockquote>
+        The local reef club is Bay Area Reefers. Frag swaps, DBTC program, people who've dealt with the same heat problems. Already on the list.
+      </blockquote>
+
+      <h2>The Site Got a Reef Page</h2>
+      <p>
+        There's now a <a href="../reef.html" style="color: var(--purple-light);">Reef section</a> on this site. It pulls photos directly from the server — drag and drop them into the bot console, they show up on the page automatically. The bot reads the EXIF metadata from each photo so old pictures show their actual shoot date instead of the upload date. Sorted newest first, lightbox on click.
+      </p>
+
+      <p>
+        The plan is to document the whole build as it happens. Tank setup, cycling, first coral, first fish, all of it. Something to look back on when the tanks are established and thriving — or a cautionary tale if something goes sideways, which is always a possibility with reef.
+      </p>
+
+      <h2>What Else Got Built Today</h2>
+      <p>
+        The bot console now has a Photos tab with drag and drop upload, a thumbnail gallery, EXIF date display, and delete buttons. The blog publisher got a Video block type for when we eventually sort out video hosting. The Discord got a rules channel — pinned automatically by the bot on startup.
+      </p>
+
+      <p>
+        All of this runs off a Proxmox VM that we just expanded to have actual storage. 30TB on the host. The VM has room to grow. We're not running out of space.
+      </p>
+
+      <h2>What's Next</h2>
+      <p>
+        Getting both tanks set up over the next few months. Documenting it here. Streaming on weekends. The reef and the stream are going to cross over eventually — tank cams, parameter tracking, maybe a !salinity command that pulls live data from an Apex controller. We'll see how deep this goes.
+      </p>
+
+      <p>
+        It started as just streaming TFT. Now there's infrastructure. There's coral incoming. There's a jawfish that doesn't know it yet but it's about to live in a very well-documented tank.
+      </p>
+
+      <p>
+        We move. 🍩🪸
+      </p>
+
+      <p>— MsTasty</p>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">🍩 MsTasty</div>
+        <div class="footer-links">
+          <a href="https://kick.com/ms-tasty" target="_blank">Kick</a>
+          <a href="https://discord.gg/KPm6GtwH9j" target="_blank">Discord</a>
+          <a href="../blog.html">Blog</a>
+        </div>
+        <div class="footer-copy">© 2026 MsTasty · Built with 🍩</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    const toggle = document.getElementById('nav-toggle');
+    const links = document.getElementById('nav-links');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 24), { passive: true });
+    if (toggle) toggle.addEventListener('click', () => links.classList.toggle('open'));
+  </script>
+</body>
+</html>

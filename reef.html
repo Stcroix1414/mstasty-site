@@ -47,6 +47,12 @@
       font-size: 0.75rem;
       color: var(--text-muted);
     }
+    .reef-photo-caption {
+      font-size: 0.85rem;
+      color: var(--text);
+      margin-bottom: 4px;
+      line-height: 1.5;
+    }
     .reef-empty {
       text-align: center;
       padding: 80px 0;
@@ -217,10 +223,11 @@
           card.innerHTML   = `
             <img src="${src}" alt="${p.filename}" loading="lazy">
             <div class="reef-photo-info">
+              ${p.caption ? `<div class="reef-photo-caption">${p.caption}</div>` : ''}
               <div class="reef-photo-date">${dateStr || 'Date unknown'}</div>
             </div>
           `;
-          card.addEventListener('click', () => openLightbox(src, dateStr));
+          card.addEventListener('click', () => openLightbox(src, p.caption ? `${p.caption} — ${dateStr}` : dateStr));
           grid.appendChild(card);
           ro.observe(card);
         });
