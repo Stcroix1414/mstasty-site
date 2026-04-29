@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Setup Is Actually Cooked — MsTasty</title>
+  <meta name="description" content="Live stats, a custom console, a Discord bot, and now a one-click blog publisher. This got out of hand in the best way." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">🍩 <span>MsTasty</span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#schedule">Schedule</a></li>
+        <li><a href="../index.html#stats">Stats</a></li>
+        <li><a href="../blog.html">Blog</a></li>
+        <li><a href="../index.html#socials">Socials</a></li>
+      </ul>
+      <a href="https://kick.com/ms-tasty" target="_blank" class="btn btn-primary nav-cta">▶ Watch Live</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="post-header">
+      <a href="../blog.html" style="color: var(--text-muted); font-size: 0.88rem; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 28px; transition: color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">
+        ← Back to Blog
+      </a>
+      <div class="post-meta">
+        <span class="blog-tag">Stream</span>
+        <span>April 28, 2026</span>
+      </div>
+      <h1 style="font-size: clamp(2rem, 5vw, 3.8rem); margin-bottom: 20px;">
+        The Setup Is Actually <span class="gradient-text">Cooked</span>
+      </h1>
+      <p style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.75;">
+        Live stats, a custom console, a Discord bot, and now a one-click blog publisher. This got out of hand in the best way.
+      </p>
+    </div>
+
+    <div class="post-body">
+
+      <p>
+        When I said I wanted to stream, I did not mean I wanted to build a whole piece of infrastructure around it. And yet here we are.
+      </p>
+
+      <p>
+        TastyBot started as a chat bot. Just something to respond to commands and track deaths because manually typing !death every time I got clapped was beneath me. That was supposed to be it. Then I needed a web console to control it. Then the console needed a death counter. Then the death counter needed an OBS overlay. Then the overlay needed a Stream Deck button. One thing kept compounding and I never said stop.
+      </p>
+
+      <h2>What's Actually Running Now</h2>
+      <p>
+        The bot runs 24/7 on a Linux server. It handles chat commands, tracks LP and deaths, manages predictions, logs every session. There's a web console at a local IP where I can control everything mid-stream without touching chat — set rank, log placements, adjust the death counter, send messages, end the stream and save the session. The whole thing.
+      </p>
+
+      <p>
+        The site you're on right now pulls live data from that bot through a Cloudflare Tunnel. When I'm streaming, those stats on the homepage are real. If it says 14 deaths, those are real deaths. I earned every single one.
+      </p>
+
+      <blockquote>
+        The site also has a Discord bot that posts go-live alerts, welcomes new members, and lets me manage the death counter from Discord slash commands. Yes, I built that too.
+      </blockquote>
+
+      <h2>The Blog Thing</h2>
+      <p>
+        As of today the console has a Blog tab. I fill in the title, content blocks, hit Publish — and it writes the HTML, updates the post index, commits to GitHub, and pushes. The site updates in about a minute. I'm writing this post to test it, and also because I think it's genuinely impressive and I wanted to talk about it.
+      </p>
+
+      <p>
+        No CMS. No WordPress. No third-party anything. Just a bot that knows how to run git commands.
+      </p>
+
+      <h2>What's Next</h2>
+      <p>
+        Streams are weekends at 3PM PST. TFT ranked, Windrose, League, and whatever else. Also building two reef tanks in the coming months — a 1.5 gallon pico and a 17 gallon cube. That'll probably end up on this blog too because why not, this is my website and I do what I want.
+      </p>
+
+      <p>
+        Come hang. Discord link is everywhere on this site. TastyBot will greet you personally.
+      </p>
+
+      <p>— MsTasty 🍩</p>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">🍩 MsTasty</div>
+        <div class="footer-links">
+          <a href="https://kick.com/ms-tasty" target="_blank">Kick</a>
+          <a href="https://discord.gg/KPm6GtwH9j" target="_blank">Discord</a>
+          <a href="../blog.html">Blog</a>
+        </div>
+        <div class="footer-copy">© 2026 MsTasty · Built with 🍩</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    const toggle = document.getElementById('nav-toggle');
+    const links = document.getElementById('nav-links');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 24), { passive: true });
+    if (toggle) toggle.addEventListener('click', () => links.classList.toggle('open'));
+  </script>
+</body>
+</html>
