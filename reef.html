@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reef — MsTasty</title>
+  <meta name="description" content="MsTasty's reef tank builds. Photos, progress, and coral." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .reef-header {
+      padding: 120px 0 60px;
+      text-align: center;
+    }
+    .reef-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      padding-bottom: 80px;
+    }
+    .reef-photo {
+      position: relative;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .reef-photo:hover {
+      border-color: var(--border-purple);
+      transform: translateY(-2px);
+    }
+    .reef-photo img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+    }
+    .reef-photo-info {
+      padding: 10px 14px 12px;
+    }
+    .reef-photo-date {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .reef-empty {
+      text-align: center;
+      padding: 80px 0;
+      color: var(--text-muted);
+      grid-column: 1 / -1;
+    }
+    .reef-empty-icon { font-size: 3rem; margin-bottom: 16px; }
+
+    /* Lightbox */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+    #lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      font-size: 1.5rem;
+      color: #fff;
+      cursor: pointer;
+      background: none;
+      border: none;
+      line-height: 1;
+    }
+    #lightbox-date {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">🍩 <span>MsTasty</span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#schedule">Schedule</a></li>
+        <li><a href="index.html#stats">Stats</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="reef.html">Reef</a></li>
+        <li><a href="index.html#socials">Socials</a></li>
+      </ul>
+      <a href="https://kick.com/ms-tasty" target="_blank" class="btn btn-primary nav-cta">▶ Watch Live</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <div class="reef-header">
+    <div class="container">
+      <div class="section-label reveal">Reef</div>
+      <h1 class="reveal" style="font-size: clamp(2.5rem,6vw,5rem); margin-bottom: 14px;">
+        The <span class="gradient-text">Tanks</span>
+      </h1>
+      <p class="reveal" style="color: var(--text-muted); font-size: 1.05rem; max-width: 520px; margin: 0 auto;">
+        Two reef builds in progress — a 1.5 gallon pico and a 17 gallon UNS cube. Photos updated as things develop.
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="reef-grid" id="reef-grid">
+      <!-- filled by JS -->
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lightbox-img" src="" alt="">
+    <div id="lightbox-date"></div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">🍩 MsTasty</div>
+        <div class="footer-links">
+          <a href="https://kick.com/ms-tasty" target="_blank">Kick</a>
+          <a href="https://discord.gg/KPm6GtwH9j" target="_blank">Discord</a>
+          <a href="https://www.tiktok.com/@mstasty14" target="_blank">TikTok</a>
+          <a href="blog.html">Blog</a>
+        </div>
+        <div class="footer-copy">© 2026 MsTasty · Built with 🍩</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const API = 'https://api.mstasty.live';
+
+    // Nav
+    const nav    = document.getElementById('nav');
+    const toggle = document.getElementById('nav-toggle');
+    const links  = document.getElementById('nav-links');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 24), { passive: true });
+    if (toggle) toggle.addEventListener('click', () => links.classList.toggle('open'));
+
+    // Reveal
+    const ro = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+    // Format EXIF date "2024:03:15 14:22:10" → "March 15, 2024"
+    function formatDate(raw) {
+      if (!raw) return '';
+      const parts = raw.replace('T',' ').split(' ')[0].split(/[:\-]/);
+      if (parts.length < 3) return raw;
+      const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      const y = parts[0], m = parseInt(parts[1])-1, d = parseInt(parts[2]);
+      if (isNaN(m) || m < 0 || m > 11) return raw;
+      return `${months[m]} ${d}, ${y}`;
+    }
+
+    // Lightbox
+    function openLightbox(src, date) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-date').textContent = date;
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.getElementById('lightbox-img').src = '';
+      document.body.style.overflow = '';
+    }
+    document.getElementById('lightbox').addEventListener('click', e => {
+      if (e.target === document.getElementById('lightbox')) closeLightbox();
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    // Load photos
+    const grid = document.getElementById('reef-grid');
+
+    fetch(`${API}/api/photos`)
+      .then(r => r.ok ? r.json() : [])
+      .then(photos => {
+        if (!photos.length) {
+          grid.innerHTML = '<div class="reef-empty"><div class="reef-empty-icon">🪸</div><p>No photos yet — check back as the builds progress.</p></div>';
+          return;
+        }
+        // Sort by date descending
+        photos.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+        photos.forEach((p, i) => {
+          const src        = `${API}/photos/${encodeURIComponent(p.filename)}`;
+          const dateStr    = formatDate(p.date);
+          const card       = document.createElement('div');
+          card.className   = 'reef-photo reveal';
+          card.style.animationDelay = `${(i % 4) * 0.08}s`;
+          card.innerHTML   = `
+            <img src="${src}" alt="${p.filename}" loading="lazy">
+            <div class="reef-photo-info">
+              <div class="reef-photo-date">${dateStr || 'Date unknown'}</div>
+            </div>
+          `;
+          card.addEventListener('click', () => openLightbox(src, dateStr));
+          grid.appendChild(card);
+          ro.observe(card);
+        });
+      })
+      .catch(() => {
+        grid.innerHTML = '<div class="reef-empty"><div class="reef-empty-icon">🪸</div><p>Couldn\'t load photos right now.</p></div>';
+      });
+  </script>
+</body>
+</html>
