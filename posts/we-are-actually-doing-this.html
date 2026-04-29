@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>We're Actually Doing This — MsTasty</title>
+  <meta name="description" content="A purple donut with a website. First post. Let's talk about it." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">🍩 <span>MsTasty</span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#schedule">Schedule</a></li>
+        <li><a href="../index.html#stats">Stats</a></li>
+        <li><a href="../blog.html">Blog</a></li>
+        <li><a href="../index.html#socials">Socials</a></li>
+      </ul>
+      <a href="https://kick.com/ms-tasty" target="_blank" class="btn btn-primary nav-cta">▶ Watch Live</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="post-header">
+      <a href="../blog.html" style="color: var(--text-muted); font-size: 0.88rem; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 28px; transition: color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">
+        ← Back to Blog
+      </a>
+      <div class="post-meta">
+        <span class="blog-tag">Stream</span>
+        <span>April 29, 2026</span>
+      </div>
+      <h1 style="font-size: clamp(2rem, 5vw, 3.8rem); margin-bottom: 20px;">
+        We're Actually <span class="gradient-text">Doing This</span>
+      </h1>
+      <p style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.75;">
+        A purple donut with a website. A custom chat bot. A Discord server. A death counter on stream. This got out of hand fast and honestly? Good.
+      </p>
+    </div>
+
+    <div class="post-body">
+
+      <p>
+        I don't know when exactly this became a whole thing. It started as just streaming TFT on Kick — no face, no branding, just a donut avatar I threw together and a lot of questionable augment choices. That was supposed to be it.
+      </p>
+
+      <p>
+        Then I built a chat bot. Then the chat bot needed a web console. Then it needed a death counter. Then the death counter needed an OBS overlay. Then I wired up a Stream Deck so I could hit a button when I die instead of typing in chat like an animal. One thing kept leading to another and somewhere in there I stopped questioning it.
+      </p>
+
+      <blockquote>
+        "No cap, no face, just a donut with eyes and a dream." — TastyBot, in chat, about me, which I wrote.
+      </blockquote>
+
+      <h2>Why Kick?</h2>
+      <p>
+        Honest answer — I wanted somewhere that wasn't oversaturated. Twitch is a grind with a thousand people streaming the same game. Kick is smaller, the community actually talks, and the chat moves at a pace where I can keep up with people. It felt more like actually hanging out and less like performing into a void.
+      </p>
+
+      <p>
+        Also the algorithm doesn't punish you for being new, which helps when you're a donut who just started.
+      </p>
+
+      <h2>The Donut Thing</h2>
+      <p>
+        The PNGtuber setup is fully custom — I built it myself. Purple donut, my actual eyes and mouth greenscreened on. It moves when I talk. It blinks. It is, objectively, a little unhinged and I love it. The character kind of took on its own personality — laid back, a little sarcastic, emotionally invested in TFT outcomes that genuinely do not matter.
+      </p>
+
+      <p>
+        If you've seen the stream you know the vibe. If you haven't — it's that.
+      </p>
+
+      <h2>What's Actually Going On Now</h2>
+      <p>
+        We're streaming weekends at 3PM PST. Schedule has been loose while life does its thing, but we're building consistency. Games right now are TFT ranked, Windrose (genuinely underrated — go look it up), and whatever else seems fun on a given day.
+      </p>
+
+      <p>
+        TastyBot is tracking deaths, LP, chatters, session history — the whole thing. The live stats widget on this site pulls directly from the bot while I'm streaming. If you're reading this and the stream is live, those numbers are real time. If I've died 40 times, those are real deaths.
+      </p>
+
+      <h2>The Discord</h2>
+      <p>
+        We've got a Discord now. It's new, it's small, and I want to keep it that way for a while — an actual community rather than just a server with 10,000 people who never talk. Come hang out. Link is everywhere on this site.
+      </p>
+
+      <h2>Alright</h2>
+      <p>
+        That's the first post. Now you know what this is. Come watch sometime — the vibes are immaculate, the gameplay is questionable, and TastyBot will greet you personally when you show up in chat.
+      </p>
+
+      <p>
+        We move. 🍩
+      </p>
+
+      <p>— MsTasty</p>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">🍩 MsTasty</div>
+        <div class="footer-links">
+          <a href="https://kick.com/ms-tasty" target="_blank">Kick</a>
+          <a href="https://discord.gg/KPm6GtwH9j" target="_blank">Discord</a>
+          <a href="../blog.html">Blog</a>
+        </div>
+        <div class="footer-copy">© 2026 MsTasty · Built with 🍩</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    const toggle = document.getElementById('nav-toggle');
+    const links = document.getElementById('nav-links');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 24), { passive: true });
+    if (toggle) toggle.addEventListener('click', () => links.classList.toggle('open'));
+  </script>
+</body>
+</html>
