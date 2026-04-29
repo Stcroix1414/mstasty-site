@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MsTasty — Kick Streamer</title>
+  <meta name="description" content="MsTasty is a variety streamer on Kick. TFT, Windrose, League, and whatever looks fun. No face. Just vibes. And a donut." />
+  <meta property="og:title" content="MsTasty" />
+  <meta property="og:description" content="Variety streamer on Kick. Come hang." />
+  <meta property="og:url" content="https://mstasty.live" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">🍩 <span>MsTasty</span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#stats">Stats</a></li>
+        <li><a href="#clips">Clips</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#socials">Socials</a></li>
+      </ul>
+      <a href="https://kick.com/ms-tasty" target="_blank" class="btn btn-primary nav-cta">▶ Watch Live</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <div class="hero-bg">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+    <div class="hero-grid"></div>
+    <div class="hero-fade"></div>
+
+    <div class="hero-content">
+      <div class="live-badge" id="live-badge">
+        <span class="live-dot"></span>
+        <span id="live-text">Checking...</span>
+      </div>
+      <h1 class="hero-title"><span class="gradient-text">MsTasty</span></h1>
+      <p class="hero-tagline">No face. Just vibes. And a donut.</p>
+      <p class="hero-sub">Variety streamer on Kick — TFT · Windrose · League · whatever looks fun.</p>
+      <div class="hero-ctas">
+        <a href="https://kick.com/ms-tasty" target="_blank" class="btn btn-primary btn-lg">▶ Watch on Kick</a>
+        <a href="https://discord.gg/KPm6GtwH9j" target="_blank" class="btn btn-ghost btn-lg">💬 Join Discord</a>
+      </div>
+    </div>
+
+    <div class="hero-donut" aria-hidden="true">
+      <img src="assets/donut-hero.png" alt="MsTasty donut character" />
+    </div>
+
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-label reveal">About</div>
+      <div class="about-grid">
+        <div class="about-avatar reveal">
+          <div class="avatar-frame">
+            <img src="assets/donut-hero.png" alt="MsTasty" class="avatar-donut" />
+            <div class="avatar-ring"></div>
+            <div class="avatar-ring ring-2"></div>
+          </div>
+        </div>
+        <div class="about-content">
+          <h2 class="reveal">Who is <span class="gradient-text">MsTasty</span>?</h2>
+          <p class="about-text reveal reveal-delay-1">A variety streamer rocking a custom purple donut PNGtuber setup — built from scratch. Actual eyes and mouth greenscreened onto a donut. Yes it's a guy. Yes it's a donut. No further questions.</p>
+          <p class="about-text reveal reveal-delay-2">Started as a TFT grind and turned into a whole thing. Now we play whatever looks fun — TFT ranked, Windrose, League, Tarkov, Civ. The vibes are always immaculate even when the gameplay isn't.</p>
+          <div class="about-stats reveal reveal-delay-3">
+            <div class="about-stat">
+              <div class="about-stat-value gradient-text">Kick</div>
+              <div class="about-stat-label">Platform</div>
+            </div>
+            <div class="about-stat">
+              <div class="about-stat-value gradient-text">Variety</div>
+              <div class="about-stat-label">Content</div>
+            </div>
+            <div class="about-stat">
+              <div class="about-stat-value gradient-text">PST</div>
+              <div class="about-stat-label">Timezone</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SCHEDULE ── -->
+  <section id="schedule" class="section section-alt">
+    <div class="container">
+      <div class="section-label reveal">Schedule</div>
+      <h2 class="section-title reveal">When We <span class="gradient-text">Stream</span></h2>
+      <p class="section-sub reveal">Schedule is loose — follow on Kick to get notified the second we go live.</p>
+      <div class="schedule-grid reveal">
+        <div class="schedule-card inactive">
+          <div class="day-label">Mon</div>
+          <div class="day-name">Monday</div>
+          <div class="day-time">—</div>
+        </div>
+        <div class="schedule-card inactive">
+          <div class="day-label">Tue</div>
+          <div class="day-name">Tuesday</div>
+          <div class="day-time">—</div>
+        </div>
+        <div class="schedule-card inactive">
+          <div class="day-label">Wed</div>
+          <div class="day-name">Wednesday</div>
+          <div class="day-time">—</div>
+        </div>
+        <div class="schedule-card inactive">
+          <div class="day-label">Thu</div>
+          <div class="day-name">Thursday</div>
+          <div class="day-time">—</div>
+        </div>
+        <div class="schedule-card inactive">
+          <div class="day-label">Fri</div>
+          <div class="day-name">Friday</div>
+          <div class="day-time">—</div>
+        </div>
+        <div class="schedule-card active">
+          <div class="day-badge">Live</div>
+          <div class="day-label">Sat</div>
+          <div class="day-name">Saturday</div>
+          <div class="day-time">3PM PST</div>
+        </div>
+        <div class="schedule-card active">
+          <div class="day-badge">Live</div>
+          <div class="day-label">Sun</div>
+          <div class="day-name">Sunday</div>
+          <div class="day-time">3PM PST</div>
+        </div>
+      </div>
+      <p class="schedule-note reveal">
+        🍩 Schedule may shift — follow on <a href="https://kick.com/ms-tasty" target="_blank">Kick</a> or join the <a href="https://discord.gg/KPm6GtwH9j" target="_blank">Discord</a> for real-time updates.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── LIVE STATS ── -->
+  <section id="stats" class="section">
+    <div class="container">
+      <div class="section-label reveal">Live Stats</div>
+      <h2 class="section-title reveal">Stream <span class="gradient-text">Dashboard</span></h2>
+      <p class="section-sub reveal">Real-time data pulled from TastyBot during live streams.</p>
+      <div class="stats-status reveal" id="stats-status">
+        <div class="status-dot offline" id="status-dot"></div>
+        <span id="status-text">Loading...</span>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card gold reveal reveal-delay-1">
+          <div class="stat-icon">💀</div>
+          <div class="stat-value" id="stat-deaths">—</div>
+          <div class="stat-label">Deaths This Stream</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-2">
+          <div class="stat-icon">🏆</div>
+          <div class="stat-value" id="stat-rank">—</div>
+          <div class="stat-label">Current Rank</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-3">
+          <div class="stat-icon">📈</div>
+          <div class="stat-value" id="stat-lp">—</div>
+          <div class="stat-label">LP This Session</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-4">
+          <div class="stat-icon">⏱️</div>
+          <div class="stat-value" id="stat-uptime">—</div>
+          <div class="stat-label">Stream Uptime</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-5">
+          <div class="stat-icon">💬</div>
+          <div class="stat-value" id="stat-chatters">—</div>
+          <div class="stat-label">Unique Chatters</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-6">
+          <div class="stat-icon">🎮</div>
+          <div class="stat-value" id="stat-game">—</div>
+          <div class="stat-label">Current Game</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CLIPS ── -->
+  <section id="clips" class="section section-alt">
+    <div class="container">
+      <div class="section-label reveal">Clips</div>
+      <h2 class="section-title reveal">Best <span class="gradient-text">Moments</span></h2>
+      <p class="section-sub reveal">Highlights from the stream. Sometimes great plays. Mostly deaths.</p>
+      <div class="clips-grid reveal">
+        <div class="clip-card placeholder">
+          <div class="clip-thumb">🍩</div>
+          <div class="clip-info">
+            <div class="clip-title">Clips coming soon</div>
+            <div class="clip-meta">Check Kick for VODs</div>
+          </div>
+        </div>
+        <div class="clip-card placeholder">
+          <div class="clip-thumb">💀</div>
+          <div class="clip-info">
+            <div class="clip-title">Death compilation incoming</div>
+            <div class="clip-meta">There is a lot of material</div>
+          </div>
+        </div>
+        <div class="clip-card placeholder">
+          <div class="clip-thumb">🏆</div>
+          <div class="clip-info">
+            <div class="clip-title">Actually good plays</div>
+            <div class="clip-meta">Rare but they exist</div>
+          </div>
+        </div>
+      </div>
+      <div class="clips-cta reveal">
+        <a href="https://kick.com/ms-tasty/videos" target="_blank" class="btn btn-ghost">View all VODs on Kick →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BLOG ── -->
+  <section id="blog" class="section section-cafe">
+    <div class="container">
+      <div class="section-label reveal">Blog</div>
+      <h2 class="section-title reveal">Latest <span class="gradient-text">Posts</span></h2>
+      <p class="section-sub reveal">Thoughts, updates, and whatever else is worth writing down.</p>
+      <div class="blog-grid" id="blog-grid">
+        <!-- Posts loaded by main.js -->
+      </div>
+      <div class="blog-empty reveal" id="blog-empty" style="display:none">
+        <div class="blog-empty-icon">🍩</div>
+        <p>No posts yet — check back soon.</p>
+      </div>
+      <div class="blog-cta reveal" id="blog-cta" style="display:none">
+        <a href="blog.html" class="btn btn-ghost">View all posts →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SOCIALS ── -->
+  <section id="socials" class="section section-alt">
+    <div class="container">
+      <div class="section-label reveal">Socials</div>
+      <h2 class="section-title reveal">Find <span class="gradient-text">MsTasty</span></h2>
+      <div class="socials-grid reveal">
+        <a href="https://kick.com/ms-tasty" target="_blank" class="social-card kick">
+          <div class="social-icon kick-icon">▶</div>
+          <div class="social-info">
+            <div class="social-name">Kick</div>
+            <div class="social-handle">kick.com/ms-tasty</div>
+          </div>
+          <div class="social-arrow">→</div>
+        </a>
+        <a href="https://discord.gg/KPm6GtwH9j" target="_blank" class="social-card discord">
+          <div class="social-icon discord-icon">💬</div>
+          <div class="social-info">
+            <div class="social-name">Discord</div>
+            <div class="social-handle">Join the server</div>
+          </div>
+          <div class="social-arrow">→</div>
+        </a>
+        <a href="https://www.tiktok.com/@mstasty14" target="_blank" class="social-card tiktok">
+          <div class="social-icon tiktok-icon">♪</div>
+          <div class="social-info">
+            <div class="social-name">TikTok</div>
+            <div class="social-handle">@mstasty14</div>
+          </div>
+          <div class="social-arrow">→</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">🍩 MsTasty</div>
+        <div class="footer-links">
+          <a href="https://kick.com/ms-tasty" target="_blank">Kick</a>
+          <a href="https://discord.gg/KPm6GtwH9j" target="_blank">Discord</a>
+          <a href="https://www.tiktok.com/@mstasty14" target="_blank">TikTok</a>
+          <a href="blog.html">Blog</a>
+        </div>
+        <div class="footer-copy">© 2026 MsTasty · Built with 🍩</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

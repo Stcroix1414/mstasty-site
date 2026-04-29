@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>POST TITLE — MsTasty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">🍩 <span>MsTasty</span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#schedule">Schedule</a></li>
+        <li><a href="../index.html#stats">Stats</a></li>
+        <li><a href="../blog.html">Blog</a></li>
+        <li><a href="../index.html#socials">Socials</a></li>
+      </ul>
+      <a href="https://kick.com/ms-tasty" target="_blank" class="btn btn-primary nav-cta">▶ Watch Live</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="post-header">
+      <a href="../blog.html" style="color: var(--text-muted); font-size: 0.88rem; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 24px;">
+        ← Back to Blog
+      </a>
+      <div class="post-meta">
+        <span class="blog-tag">STREAM</span>  <!-- change tag -->
+        <span>April 29, 2026</span>           <!-- change date -->
+      </div>
+      <h1 style="font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 20px;">
+        Post Title Here
+      </h1>
+      <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.7;">
+        A short intro sentence or two that summarizes the post.
+      </p>
+    </div>
+
+    <div class="post-body">
+
+      <h2>Section Header</h2>
+      <p>
+        Write your content here. You can use regular paragraphs, and they'll look great automatically.
+      </p>
+
+      <blockquote>
+        Use blockquotes for highlights, quotes, or things you want to call out.
+      </blockquote>
+
+      <h3>Sub-section</h3>
+      <p>
+        More content. Keep writing. The styles handle everything.
+      </p>
+
+      <p>— MsTasty 🍩</p>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">🍩 MsTasty</div>
+        <div class="footer-links">
+          <a href="https://kick.com/ms-tasty" target="_blank">Kick</a>
+          <a href="https://discord.gg/KPm6GtwH9j" target="_blank">Discord</a>
+          <a href="../blog.html">Blog</a>
+        </div>
+        <div class="footer-copy">© 2026 MsTasty · Built with 🍩</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    const toggle = document.getElementById('nav-toggle');
+    const links = document.getElementById('nav-links');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 24), { passive: true });
+    if (toggle) toggle.addEventListener('click', () => links.classList.toggle('open'));
+  </script>
+</body>
+</html>
