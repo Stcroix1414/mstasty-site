@@ -353,6 +353,21 @@
       margin-left: 4px;
     }
     .track-card:hover .track-play { opacity: 1; }
+    .track-coming {
+      position: absolute;
+      top: 14px; right: 14px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--green);
+      padding: 4px 10px;
+      border-radius: 2px;
+      z-index: 2;
+      box-shadow: 0 0 14px rgba(0,255,136,0.5);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
 
     /* YouTube embed card */
     .yt-embed-wrap {
@@ -663,7 +678,7 @@
     <p class="hero-sub">&ldquo;The sound of 5:47 AM. Heavy, honest, and unresolved.&rdquo;</p>
     <div class="release-badge">
       <span class="release-dot"></span>
-      <span class="release-text">Debut release &mdash; Friday, May 8, 2026</span>
+      <span class="release-text">Still Standing &mdash; Friday, May 8, 2026</span>
       <span class="release-dot"></span>
     </div>
     <div class="countdown" id="countdown">
@@ -717,7 +732,7 @@
         <div class="track-border"></div>
         <a href="https://youtu.be/o28Dn0zxDzg" target="_blank" class="track-play" style="z-index:2;"></a>
         <div class="track-info">
-          <div class="track-label">// Single &mdash; May 8, 2026</div>
+          <div class="track-label">// Single &mdash; Out Now</div>
           <div class="track-title">Til The Sun Burns Through</div>
         </div>
       </div>
@@ -726,14 +741,14 @@
         <div class="track-border"></div>
         <div class="track-play"></div>
         <div class="track-info">
-          <div class="track-label">// Single &mdash; May 8, 2026</div>
+          <div class="track-label">// Single &mdash; Out Now</div>
           <div class="track-title">The Next Climb</div>
         </div>
       </div>
-      <div class="track-card" style="grid-column: 1 / -1; max-width: 600px; margin: 0 auto; width: 100%;">
+      <div class="track-card track-card--upcoming" style="grid-column: 1 / -1; max-width: 600px; margin: 0 auto; width: 100%;">
         <div class="track-card-bg"></div>
         <div class="track-border"></div>
-        <div class="track-play"></div>
+        <div class="track-coming">Releasing Friday</div>
         <div class="track-info">
           <div class="track-label">// Single &mdash; May 8, 2026</div>
           <div class="track-title">Still Standing</div>
