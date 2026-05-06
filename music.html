@@ -549,6 +549,80 @@
       pointer-events: none;
       z-index: 9999;
     }
+    .release-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-top: 1.8rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--green);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 1s ease 1.0s forwards;
+    }
+    .release-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    .countdown {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.2rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 1.1s forwards;
+    }
+    .countdown-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 52px;
+    }
+    .countdown-num {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: #fff;
+      line-height: 1;
+      text-shadow: 0 0 20px rgba(0,255,136,0.5);
+    }
+    .countdown-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.55rem;
+      color: var(--text-dim);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .countdown-sep {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1.8rem;
+      color: var(--green);
+      opacity: 0.5;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    /* After release — hide countdown, show "Out Now" */
+    .out-now {
+      display: none;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--green);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      margin-top: 1.2rem;
+      text-shadow: 0 0 20px rgba(0,255,136,0.6);
+      opacity: 0;
+      animation: fadeUp 1s ease 1.1s forwards;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--green); }
+      50% { opacity: 0.4; box-shadow: 0 0 3px var(--green); }
+    }
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -587,7 +661,21 @@
     <p class="hero-pre">// Est. 2026 &mdash; Orchestral Deathcore</p>
     <h1 class="hero-title">The Color<br>Without a Name</h1>
     <p class="hero-sub">&ldquo;The sound of 5:47 AM. Heavy, honest, and unresolved.&rdquo;</p>
-    <a href="#music" class="hero-cta">Listen Now</a>
+    <div class="release-badge">
+      <span class="release-dot"></span>
+      <span class="release-text">Debut release &mdash; Friday, May 8, 2026</span>
+      <span class="release-dot"></span>
+    </div>
+    <div class="countdown" id="countdown">
+      <div class="countdown-unit"><span class="countdown-num" id="cd-days">--</span><span class="countdown-label">days</span></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-unit"><span class="countdown-num" id="cd-hours">--</span><span class="countdown-label">hrs</span></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-unit"><span class="countdown-num" id="cd-mins">--</span><span class="countdown-label">min</span></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-unit"><span class="countdown-num" id="cd-secs">--</span><span class="countdown-label">sec</span></div>
+    </div>
+    <a href="#music" class="hero-cta">Hear It Now</a>
   </div>
   <div class="scroll-indicator">
     <span class="scroll-text">Scroll</span>
@@ -629,7 +717,7 @@
         <div class="track-border"></div>
         <a href="https://youtu.be/o28Dn0zxDzg" target="_blank" class="track-play" style="z-index:2;"></a>
         <div class="track-info">
-          <div class="track-label">// Single &mdash; 2026</div>
+          <div class="track-label">// Single &mdash; May 8, 2026</div>
           <div class="track-title">Til The Sun Burns Through</div>
         </div>
       </div>
@@ -638,7 +726,7 @@
         <div class="track-border"></div>
         <div class="track-play"></div>
         <div class="track-info">
-          <div class="track-label">// Single &mdash; 2026</div>
+          <div class="track-label">// Single &mdash; May 8, 2026</div>
           <div class="track-title">The Next Climb</div>
         </div>
       </div>
@@ -647,7 +735,7 @@
         <div class="track-border"></div>
         <div class="track-play"></div>
         <div class="track-info">
-          <div class="track-label">// Single &mdash; 2026</div>
+          <div class="track-label">// Single &mdash; May 8, 2026</div>
           <div class="track-title">Still Standing</div>
         </div>
       </div>
@@ -720,5 +808,35 @@
   <div class="footer-back"><a href="index.html">← mstasty.live</a></div>
 </footer>
 
+<script>
+  // Countdown to May 8, 2026 midnight PST (UTC-7)
+  const RELEASE = new Date('2026-05-08T00:00:00-07:00').getTime();
+
+  function updateCountdown() {
+    const now  = Date.now();
+    const diff = RELEASE - now;
+
+    if (diff <= 0) {
+      // Release day — swap countdown for "Out Now"
+      document.getElementById('countdown').style.display = 'none';
+      const badge = document.querySelector('.release-badge');
+      if (badge) badge.innerHTML = '<span class="release-dot"></span><span class="release-text">Out Now</span><span class="release-dot"></span>';
+      return;
+    }
+
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000)  /   60000);
+    const s = Math.floor((diff %   60000)  /    1000);
+
+    document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
 </body>
 </html>
