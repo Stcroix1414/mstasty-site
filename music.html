@@ -420,6 +420,116 @@
     }
     .stream-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
 
+    /* ── Audio Player ── */
+    .player-wrap {
+      margin-top: 3rem;
+      border: 1px solid var(--green-border);
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
+    }
+    .player-track-list { display: flex; flex-direction: column; }
+    .player-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.4rem;
+      border-bottom: 1px solid rgba(0,255,136,0.08);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .player-row:last-child { border-bottom: none; }
+    .player-row:hover { background: rgba(0,255,136,0.04); }
+    .player-row.active { background: rgba(0,255,136,0.08); }
+    .player-num {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      width: 20px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .player-row.active .player-num { color: var(--green); }
+    .player-title {
+      flex: 1;
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      color: #fff;
+      letter-spacing: 0.05em;
+    }
+    .player-row.active .player-title { color: var(--green); }
+    .player-plays {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+    }
+    .player-controls {
+      padding: 1.2rem 1.4rem;
+      border-top: 1px solid var(--green-border);
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .player-now-playing {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--green);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      min-height: 1em;
+    }
+    .player-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .player-btn {
+      width: 44px; height: 44px;
+      border: 1px solid var(--green);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--green);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .player-btn:hover { background: var(--green); color: var(--black); box-shadow: 0 0 20px rgba(0,255,136,0.4); }
+    .player-progress {
+      flex: 1;
+      height: 3px;
+      background: rgba(0,255,136,0.15);
+      border-radius: 2px;
+      cursor: pointer;
+      position: relative;
+    }
+    .player-progress-fill {
+      height: 100%;
+      background: var(--green);
+      border-radius: 2px;
+      width: 0%;
+      transition: width 0.1s linear;
+      pointer-events: none;
+    }
+    .player-time {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      white-space: nowrap;
+      min-width: 70px;
+      text-align: right;
+    }
+    .player-loading {
+      text-align: center;
+      padding: 2rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 0.2em;
+    }
+
     #philosophy { background: var(--dark); text-align: center; }
     .philosophy-quote {
       font-family: 'Cinzel', serif;
@@ -756,12 +866,22 @@
       </div>
     </div>
 
-    <div class="yt-label" style="margin-top: 3.5rem;">// Featured — Til The Sun Burns Through</div>
-    <div class="yt-embed-wrap">
-      <iframe src="https://www.youtube.com/embed/o28Dn0zxDzg" title="Til The Sun Burns Through — The Color Without a Name" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="player-wrap" id="audio-player">
+      <div class="player-loading" id="player-loading">// Loading tracks…</div>
+      <div class="player-track-list" id="player-track-list" style="display:none;"></div>
+      <div class="player-controls" id="player-controls" style="display:none;">
+        <div class="player-now-playing" id="player-now-playing">// Select a track</div>
+        <div class="player-bar-row">
+          <button class="player-btn" id="player-play-btn" onclick="playerToggle()">▶</button>
+          <div class="player-progress" id="player-progress" onclick="playerSeek(event)">
+            <div class="player-progress-fill" id="player-fill"></div>
+          </div>
+          <div class="player-time" id="player-time">0:00 / 0:00</div>
+        </div>
+      </div>
     </div>
 
-    <div class="stream-links">
+    <div class="stream-links" style="margin-top: 2rem;">
       <a href="https://youtu.be/o28Dn0zxDzg" target="_blank" class="stream-link"><span class="stream-dot"></span>YouTube</a>
       <a href="#" class="stream-link"><span class="stream-dot"></span>SoundCloud</a>
       <a href="#" class="stream-link"><span class="stream-dot"></span>Spotify</a>
@@ -824,7 +944,125 @@
 </footer>
 
 <script>
-  // Countdown to May 8, 2026 midnight PST (UTC-7)
+  // ── Audio Player ──
+  const API = 'https://api.mstasty.live';
+  const audio = new Audio();
+  let tracks     = [];
+  let currentIdx = -1;
+  let counted    = false;   // play count fire once per track load
+
+  function fmtTime(s) {
+    if (isNaN(s)) return '0:00';
+    const m = Math.floor(s / 60), sec = Math.floor(s % 60);
+    return m + ':' + String(sec).padStart(2,'0');
+  }
+
+  function playerLoad() {
+    fetch(API + '/api/music')
+      .then(r => r.ok ? r.json() : [])
+      .then(data => {
+        tracks = data;
+        const loading = document.getElementById('player-loading');
+        const list    = document.getElementById('player-track-list');
+        const ctrl    = document.getElementById('player-controls');
+        if (!tracks.length) {
+          loading.textContent = '// No tracks yet — check back Friday.';
+          return;
+        }
+        loading.style.display = 'none';
+        list.style.display    = '';
+        ctrl.style.display    = '';
+        tracks.forEach((t, i) => {
+          const row = document.createElement('div');
+          row.className = 'player-row';
+          row.id = 'player-row-' + i;
+          row.innerHTML = `
+            <span class="player-num">${String(i+1).padStart(2,'0')}</span>
+            <span class="player-title">${t.title}</span>
+            <span class="player-plays" id="plays-${i}">▶ ${t.plays}</span>
+          `;
+          row.addEventListener('click', () => playerSelect(i));
+          list.appendChild(row);
+        });
+        playerSelect(0);
+      })
+      .catch(() => {
+        document.getElementById('player-loading').textContent = '// Could not connect to server.';
+      });
+  }
+
+  function playerSelect(idx) {
+    currentIdx = idx;
+    counted = false;
+    const t = tracks[idx];
+    audio.src = API + '/music/' + encodeURIComponent(t.filename);
+    audio.load();
+    document.getElementById('player-now-playing').textContent = '// Now Playing — ' + t.title;
+    document.getElementById('player-play-btn').textContent = '⏸';
+    document.getElementById('player-fill').style.width = '0%';
+    document.getElementById('player-time').textContent = '0:00 / 0:00';
+    document.querySelectorAll('.player-row').forEach((r,i) => r.classList.toggle('active', i===idx));
+    audio.play().catch(() => {
+      document.getElementById('player-play-btn').textContent = '▶';
+    });
+  }
+
+  function playerToggle() {
+    if (audio.paused) {
+      audio.play();
+      document.getElementById('player-play-btn').textContent = '⏸';
+    } else {
+      audio.pause();
+      document.getElementById('player-play-btn').textContent = '▶';
+    }
+  }
+
+  function playerSeek(e) {
+    if (!audio.duration) return;
+    const bar = document.getElementById('player-progress');
+    const pct = e.offsetX / bar.offsetWidth;
+    audio.currentTime = pct * audio.duration;
+  }
+
+  audio.addEventListener('timeupdate', () => {
+    if (!audio.duration) return;
+    const pct = (audio.currentTime / audio.duration) * 100;
+    document.getElementById('player-fill').style.width = pct + '%';
+    document.getElementById('player-time').textContent =
+      fmtTime(audio.currentTime) + ' / ' + fmtTime(audio.duration);
+    // Fire play count once per track after 10 seconds
+    if (!counted && audio.currentTime > 10) {
+      counted = true;
+      const t = tracks[currentIdx];
+      fetch(API + '/api/music/play', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({filename: t.filename})
+      }).then(r => r.json()).then(r => {
+        if (r.ok) {
+          const el = document.getElementById('plays-' + currentIdx);
+          if (el) { el.textContent = '▶ ' + r.plays; tracks[currentIdx].plays = r.plays; }
+        }
+      }).catch(() => {});
+    }
+  });
+
+  audio.addEventListener('ended', () => {
+    document.getElementById('player-play-btn').textContent = '▶';
+    // Auto-advance
+    if (currentIdx < tracks.length - 1) playerSelect(currentIdx + 1);
+  });
+
+  audio.addEventListener('pause', () => {
+    document.getElementById('player-play-btn').textContent = '▶';
+  });
+  audio.addEventListener('play', () => {
+    document.getElementById('player-play-btn').textContent = '⏸';
+  });
+
+  playerLoad();
+
+  // ── Countdown to May 8, 2026 midnight PST (UTC-7)
   const RELEASE = new Date('2026-05-08T00:00:00-07:00').getTime();
 
   function updateCountdown() {
