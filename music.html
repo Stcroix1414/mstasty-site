@@ -933,20 +933,21 @@
         </ul>
       </div>
       <div>
-        <form onsubmit="return false;">
+        <form id="contact-form" onsubmit="contactSubmit(event)">
           <div class="form-row">
             <label class="form-label">Name</label>
-            <input type="text" class="form-input" placeholder="Your name">
+            <input type="text" id="cf-name" class="form-input" placeholder="Your name" required>
           </div>
           <div class="form-row">
             <label class="form-label">Email</label>
-            <input type="email" class="form-input" placeholder="your@email.com">
+            <input type="email" id="cf-email" class="form-input" placeholder="your@email.com">
           </div>
           <div class="form-row">
             <label class="form-label">Message</label>
-            <textarea class="form-textarea" placeholder="Say something..."></textarea>
+            <textarea id="cf-message" class="form-textarea" placeholder="Say something..." required></textarea>
           </div>
-          <button type="submit" class="form-submit">Send Message</button>
+          <button type="submit" class="form-submit" id="cf-btn">Send Message</button>
+          <div id="cf-status" style="margin-top:1rem;font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;display:none;"></div>
         </form>
       </div>
     </div>
@@ -1077,6 +1078,46 @@
   });
 
   playerLoad();
+
+  // ── Contact Form ──
+  function contactSubmit(e) {
+    e.preventDefault();
+    const btn    = document.getElementById('cf-btn');
+    const status = document.getElementById('cf-status');
+    const name   = document.getElementById('cf-name').value.trim();
+    const email  = document.getElementById('cf-email').value.trim();
+    const msg    = document.getElementById('cf-message').value.trim();
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    status.style.display = 'none';
+    fetch(API + '/api/contact', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({name, email, message: msg})
+    })
+    .then(r => r.json())
+    .then(r => {
+      if (r.ok) {
+        status.textContent = '// Message sent. We\'ll be in touch.';
+        status.style.color = '#00ff88';
+        document.getElementById('contact-form').reset();
+        btn.textContent = 'Sent ✓';
+      } else {
+        status.textContent = '// Error: ' + (r.error || 'something went wrong');
+        status.style.color = '#f04747';
+        btn.disabled = false;
+        btn.textContent = 'Send Message';
+      }
+      status.style.display = 'block';
+    })
+    .catch(() => {
+      status.textContent = '// Could not send — try reaching us on Discord.';
+      status.style.color = '#f04747';
+      status.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Send Message';
+    });
+  }
 
   // ── Countdown to May 8, 2026 midnight PST (UTC-7)
   const RELEASE = new Date('2026-05-08T00:00:00-07:00').getTime();
