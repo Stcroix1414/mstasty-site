@@ -419,6 +419,22 @@
       background: var(--green-glow);
     }
     .stream-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+    .stream-link.soon {
+      opacity: 0.4;
+      cursor: default;
+      pointer-events: none;
+      border-style: dashed;
+    }
+    .stream-link.soon .stream-dot { background: var(--text-dim); }
+    .stream-soon-badge {
+      font-size: 0.5rem;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 1px 5px;
+      border-radius: 2px;
+      margin-left: 2px;
+    }
 
     /* ── Audio Player ── */
     .player-wrap {
@@ -883,9 +899,9 @@
 
     <div class="stream-links" style="margin-top: 2rem;">
       <a href="https://youtu.be/o28Dn0zxDzg" target="_blank" class="stream-link"><span class="stream-dot"></span>YouTube</a>
-      <a href="#" class="stream-link"><span class="stream-dot"></span>SoundCloud</a>
-      <a href="#" class="stream-link"><span class="stream-dot"></span>Spotify</a>
-      <a href="#" class="stream-link"><span class="stream-dot"></span>Apple Music</a>
+      <span class="stream-link soon"><span class="stream-dot"></span>SoundCloud<span class="stream-soon-badge">soon</span></span>
+      <span class="stream-link soon"><span class="stream-dot"></span>Spotify<span class="stream-soon-badge">soon</span></span>
+      <span class="stream-link soon"><span class="stream-dot"></span>Apple Music<span class="stream-soon-badge">soon</span></span>
     </div>
   </div>
 </section>
@@ -910,10 +926,10 @@
         <p class="contact-intro">For booking, press, licensing, or collaborations &mdash; reach out through the form or find us on the platforms below.</p>
         <ul class="social-list">
           <li class="social-item"><a href="https://youtu.be/o28Dn0zxDzg" target="_blank">YouTube</a></li>
-          <li class="social-item"><a href="#">SoundCloud</a></li>
-          <li class="social-item"><a href="#">Instagram</a></li>
-          <li class="social-item"><a href="#">TikTok</a></li>
-          <li class="social-item"><a href="#">Spotify</a></li>
+          <li class="social-item" style="opacity:0.4;"><span style="display:flex;align-items:center;gap:1rem;font-family:'Share Tech Mono',monospace;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-dim);">// SoundCloud <span style="font-size:0.5rem;border:1px solid rgba(255,255,255,0.1);padding:1px 5px;">soon</span></span></li>
+          <li class="social-item" style="opacity:0.4;"><span style="display:flex;align-items:center;gap:1rem;font-family:'Share Tech Mono',monospace;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-dim);">// Spotify <span style="font-size:0.5rem;border:1px solid rgba(255,255,255,0.1);padding:1px 5px;">soon</span></span></li>
+          <li class="social-item" style="opacity:0.4;"><span style="display:flex;align-items:center;gap:1rem;font-family:'Share Tech Mono',monospace;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-dim);">// Apple Music <span style="font-size:0.5rem;border:1px solid rgba(255,255,255,0.1);padding:1px 5px;">soon</span></span></li>
+          <li class="social-item" style="opacity:0.4;"><span style="display:flex;align-items:center;gap:1rem;font-family:'Share Tech Mono',monospace;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-dim);">// TikTok <span style="font-size:0.5rem;border:1px solid rgba(255,255,255,0.1);padding:1px 5px;">soon</span></span></li>
         </ul>
       </div>
       <div>
