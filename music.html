@@ -958,7 +958,7 @@
   }
 
   function playerLoad() {
-    fetch(API + '/api/music')
+    fetch(API + '/api/music', {signal: AbortSignal.timeout(6000)})
       .then(r => r.ok ? r.json() : [])
       .then(data => {
         tracks = data;
@@ -966,7 +966,7 @@
         const list    = document.getElementById('player-track-list');
         const ctrl    = document.getElementById('player-controls');
         if (!tracks.length) {
-          loading.textContent = '// No tracks yet — check back Friday.';
+          loading.textContent = '// Tracks dropping Friday, May 8 — come back then.';
           return;
         }
         loading.style.display = 'none';
@@ -987,7 +987,7 @@
         playerSelect(0);
       })
       .catch(() => {
-        document.getElementById('player-loading').textContent = '// Could not connect to server.';
+        document.getElementById('player-loading').textContent = '// Tracks dropping Friday, May 8 — come back then.';
       });
   }
 
