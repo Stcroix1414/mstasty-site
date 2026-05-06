@@ -904,6 +904,10 @@ h1, h2, h3, h4 {
   border-color: rgba(255,0,80,0.35);
   box-shadow: 0 0 40px rgba(255,0,80,0.1);
 }
+.social-card.youtube:hover {
+  border-color: rgba(255,0,0,0.4);
+  box-shadow: 0 0 40px rgba(255,0,0,0.12);
+}
 
 .social-icon {
   width: 56px; height: 56px;
@@ -918,6 +922,7 @@ h1, h2, h3, h4 {
 .kick-icon    { background: rgba(83,252,26,0.1);  color: #53fc1a; }
 .discord-icon { background: rgba(88,101,242,0.1); color: #7289da; }
 .tiktok-icon  { background: rgba(255,0,80,0.1);   color: #ff0050; }
+.youtube-icon { background: rgba(255,0,0,0.1);    color: #ff0000; }
 
 .social-info { flex: 1; }
 .social-name {
